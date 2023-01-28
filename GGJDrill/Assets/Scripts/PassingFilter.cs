@@ -3,23 +3,22 @@ using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
 
-public class WaterState : MonoBehaviour
+public class PassingFilter : MonoBehaviour
 {
+    // State manager
+    private StateManager stateManager;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start() 
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        stateManager = StateManager.Instance;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(!stateManager.canPassFilter)
+        {
+            return;
+        }
         if (collision.CompareTag("Filter"))
         {
             collision.GetComponent<BoxCollider2D>().enabled = false;
@@ -28,6 +27,11 @@ public class WaterState : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if(!stateManager.canPassFilter)
+        {
+            return;
+        }
+
         if (collision.CompareTag("Filter"))
         {
             collision.GetComponent<BoxCollider2D>().enabled = true;
