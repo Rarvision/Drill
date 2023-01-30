@@ -56,9 +56,9 @@ public class Squating : MonoBehaviour
         Vector2 rightStart = new Vector2((transform.position.x + boxCollider.size.x / 2), boxCollider.offset.y);
 
 
-        RaycastHit2D leftHitResult =  Physics2D.Raycast(leftStart, Vector2.up, 10f, layerMask);
+        RaycastHit2D leftHitResult =  Physics2D.Raycast(leftStart, Vector2.up, 2f, layerMask);
 
-        RaycastHit2D rightHitResult = Physics2D.Raycast(rightStart, Vector2.up, 10f, layerMask);
+        RaycastHit2D rightHitResult = Physics2D.Raycast(rightStart, Vector2.up, 2f, layerMask);
 
        /* Debug.DrawRay(leftStart, Vector2.up,Color.yellow);
         Debug.DrawRay(rightStart, Vector2.up,Color.yellow);*/
