@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     private void Start() 
     {
-        player = GameObject.Find("Player");  
+        player = GameObject.FindGameObjectWithTag("Player");  
     }
 
     // Update state parameters based on state number

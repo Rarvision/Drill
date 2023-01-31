@@ -5,7 +5,11 @@ using UnityEngine;
 // Attach to Player object
 public class Sliding : MonoBehaviour
 {
+    // sliding state for animation
+    private const int SLIDING = 4;
+
     private Rigidbody2D rb;
+    private Animator anim;
     // store the velocity entering the sliding area
     private Vector2 vel;
 
@@ -17,6 +21,7 @@ public class Sliding : MonoBehaviour
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         gameManager = GameManager.Instance;
     }
 
@@ -26,6 +31,7 @@ public class Sliding : MonoBehaviour
             vel = rb.velocity;
             rb.velocity = vel * slidingSpeed;
             gameManager.isInputDisabled = true;
+            anim.SetInteger("state", SLIDING);
         }
     }
 

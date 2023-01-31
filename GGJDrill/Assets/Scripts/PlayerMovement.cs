@@ -62,5 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
         // TODO: UPDATE THIS PART ACCORDING TO THE NEW STATE MACHINE
         anim.SetInteger("state", (int)state);
+        
+        
     }
 }
