@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewPlayerMovement : MonoBehaviour
+// Attach to Player object
+public class PlayerMovement : MonoBehaviour
 {
     // Components
     private Rigidbody2D rb;
@@ -13,14 +14,8 @@ public class NewPlayerMovement : MonoBehaviour
     private float inputX = 0.0f;
     [SerializeField] float runSpeed = 10.0f;
 
-    // State manager
-    private StateManager stateManager;
-        // int stateNumber = 0;
-        // bool canJump = true;
-        // bool canSquat = true;
-        // bool canSmash = false;
-        // bool canSlide = false;
-        // gravityScale -- rb.gravityScale;
+    // Game manager
+    private GameManager gameManager;
 
     // MovementStatus
     private enum MovementState {
@@ -33,11 +28,16 @@ public class NewPlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        stateManager = StateManager.Instance;
+        gameManager = GameManager.Instance;
     }
 
     private void Update()
     {
+        if(gameManager.isInputDisabled)
+        {
+            return;
+        }
+
         inputX = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(inputX * runSpeed, rb.velocity.y);
 

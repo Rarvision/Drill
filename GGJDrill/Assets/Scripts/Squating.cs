@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Attach to Player object
 public class Squating : MonoBehaviour
 {
     private BoxCollider2D boxCollider;
@@ -11,8 +12,8 @@ public class Squating : MonoBehaviour
     private Vector2 orignalSize;
     private Vector2 orignalOffset;
 
-    // State manager
-    private StateManager stateManager;
+    // Game manager
+    private GameManager gameManager;
 
     [SerializeField] private LayerMask layerMask;
     
@@ -26,12 +27,12 @@ public class Squating : MonoBehaviour
         boxColliderSizeChange = new Vector2(boxCollider.size.x, boxCollider.size.y / 2 - 0.2f);
         boxColliderOffsetChange = new Vector2(boxCollider.offset.x, boxCollider.offset.y - boxCollider.size.y / 4 - 0.2f/2);
 
-        stateManager = StateManager.Instance;
+        gameManager = GameManager.Instance;
     }
 
     void Update()
     {
-        if(!stateManager.canSquat)
+        if(gameManager.isInputDisabled)
         {
             return;
         }

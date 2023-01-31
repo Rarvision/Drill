@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Attach to Player object
 public class Jumping : MonoBehaviour
 {
     // Components
@@ -12,14 +13,14 @@ public class Jumping : MonoBehaviour
     // Basic jump parameters
     [SerializeField] float jumpVel = 5.0f;
 
-    // State manager
-    private StateManager stateManager;
+    // Game manager
+    private GameManager gameManager;
 
     // Ground detection parameters
     [SerializeField] private LayerMask jumpableGround;
     
     // Audio parameters
-    [SerializeField] private AudioSource jumpSoundEffect;
+    // [SerializeField] private AudioSource jumpSoundEffect;
 
     private enum JumpState {
         // TODO: UPDATE Jump STATES;
@@ -32,13 +33,13 @@ public class Jumping : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
-        stateManager = StateManager.Instance;
+        gameManager = GameManager.Instance;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!stateManager.canJump)
+        if(gameManager.isInputDisabled)
         {
             return;
         }
@@ -77,7 +78,7 @@ public class Jumping : MonoBehaviour
 
     private void Jump()
     {
-        jumpSoundEffect.Play();
+        // jumpSoundEffect.Play();
         rb.AddForce(transform.up * jumpVel, ForceMode2D.Impulse);
     }
 }
